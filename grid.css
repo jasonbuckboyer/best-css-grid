@@ -1,0 +1,79 @@
+/**************************************************
+		Responsive Base
+***************************************************/
+.show-768, .show-480, .show-320 { display:none; }
+@media only screen and (min-width:960px) { /* Full Screen */
+	.show-768,
+	.show-480,
+	.show-320 { display:none; }
+}
+@media only screen and (min-width:768px) and (max-width:959px) { /* iPad Portait */
+	.hide-768,
+	.show-480,
+	.show-320 { display:none; }
+}
+@media only screen and (min-width:480px) and (max-width:767px) { /* iPhone Landscape */
+	.hide-768,
+	.hide-480,
+	.show-320 { display:none; }
+}
+@media only screen and (max-width:479px) { /* iPhone Portrait */
+	.hide-768,
+	.hide-480,
+	.hide-320 { display:none; }
+}
+/**************************************************
+		Grid Styles
+		gutter width default: 20px;
+		gutter width below 767px: 10px
+***************************************************/
+.grid, .grid > div { -moz-box-sizing:border-box; -o-box-sizing:border-box; -webkit-box-sizing:border-box; box-sizing:border-box; }
+.grid {  margin-left:-20px; word-wrap:break-word; }
+.grid:after { clear:both; content:''; display:table; }
+.grid > div { float:left; min-height:1px; padding-left:20px; }
+.grid.padded { margin-left:0; padding:20px 20px 20px 0; }
+.grid.no-gutters { margin-left:0; }
+.grid.no-gutters > div { padding:0; }
+.grid.padded.no-gutters { padding-left:20px; }
+.col-16 { width:16.666%; }
+.col-20 { width:20%; }
+.col-25 { width:25%; }
+.col-30 { width:30%; }
+.col-33 { width:33.333%; }
+.col-40 { width:40%; }
+.col-50 { width:50%; }
+.col-60 { width:60%; }
+.col-66 { width:66.666%; }
+.col-70 { width:70%; }
+.col-75 { width:75%; }
+.col-80 { width:80%; }
+.col-83 { width:83.333%; }
+.col-100 { width:100%; }
+.grid > .col-right { float:right; }
+.grid > .col-right + div + .col-right { clear:right; padding-top:20px; }
+.grid > :first-child + .col-right + div { clear:left; padding-top:20px; }
+@media only screen and (max-width:959px) {
+	.full-768 > div { padding-top:20px; width:100%; }
+	.full-768 > div:first-child,
+	.hide-768:first-child + div { padding-top:0; }
+}
+@media only screen and (max-width:767px) {
+	/* Reduce gutter width */
+	.grid { margin-left:-10px; }
+	.grid > div { padding-left:10px; }
+	.grid.padded { padding:10px 10px 10px 0; }
+	.grid.padded.no-gutters { padding-left:10px; }
+	.grid > .col-right + div + .col-right,
+	.grid > :first-child + .col-right + div { padding-top:10px; }
+	/* End reduce gutters */
+	.full-768 > div,
+	.full-480 > div { padding-top:10px; width:100%; }
+	.full-480 > div:first-child,
+	.hide-480:first-child + div { padding-top:0; }
+}
+@media only screen and (max-width:479px) {
+	.full-320 > div { padding-top:10px; width:100%; }
+	.full-768 > div:first-child,
+	.full-320 > div:first-child,
+	.hide-320:first-child + div { padding-top:0; }
+}

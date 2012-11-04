@@ -1,0 +1,558 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="utf-8">
+<title>CSS only grid with fluid columns and fixed-width gutters</title>
+<meta name="description" content="CSS only grid with fluid columns and fixed-width gutters. The best grid ever. CSS fluid columns, fixed margins." />
+<meta name="keywords" content="Simple CSS grid, Fluid CSS grid, CSS fluid columns fixed margins" />
+<style>
+/**************************************************
+		Demo Styles
+***************************************************/
+* { margin:0; padding:0; }
+#con { padding:20px 20px 40px 20px; }
+.notification { color:#350000; font-size:14px; font-style:italic; }
+h1 > em { display:inline-block; font-size:17px; font-weight:normal; margin-top:8px; }
+h2 { margin-top:20px; }
+h4 { margin-top:10px; }
+dt { color:#900; font-style:italic; margin-top:5px; }
+dt:first-child { margin-top:0; }
+#breakpoints { color:#900; }
+#grid-examples > p { margin-top:20px; }
+#grid-examples > .grid { margin-top:20px; }
+.module { border-radius:3px; padding:20px; }
+.green.padded { background:#7cfd7e; }
+.green .module { color:#fff; background:green; }
+.navy.padded { background:#967dfc; }
+.navy .module { color:#fff; background:navy; }
+.goldenrod.padded { background:#fcfd7e; }
+.goldenrod .module { color:#fff; background:goldenrod; }
+.blue.padded { background:#7d7cfb; }
+.blue .module { color:#fff; background:blue; }
+.darkorange.padded { background:#fccf96; }
+.darkorange .module { color:#fff; background:darkorange ; }
+.pink.padded { background:#f9ebeb; }
+.pink .module { color:#c00; background:pink; }
+.purple.padded { background:#b17ecd; }
+.purple .module { color:#fff; background:purple; }
+.olive.padded { background:#bebe7e; }
+.olive .module { color:#fff; background:olive; }
+@media only screen and (max-width:767px) {
+	#grid-examples > .grid { margin-top:10px; }
+}
+</style>
+<link href="../grid2/grid.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="con">
+	<h1>Responsive CSS only grid with fluid columns and fixed-width gutters <em>Browser support from IE8+ (Responsive support from IE9+)</em></h1>
+	<div id="grid-explanation">
+		<h2>Instructions</h2>
+		<h4>This grid follows these breakpoints:</h4>
+		<p id="breakpoints">320 <em>(320-479)</em>, 480 <em>(480-767)</em>, 768 <em>(768-959)</em></p>
+		<h4>Classes used:</h4>
+		<dl>
+			<dt>hide-768, hide-480, hide-320</dt>
+			<dd>Hide the element at that breakpoint. Supported breakpoints: 320-479, 480-767, 768-959</dd>
+			<dt>grid</dt>
+			<dd>Add this class to the containing element. If should only have <em>&lt;divs></em> as its direct children, each with one of the following classes:</dd>
+			<dt>col-16, col-20, col-25, col-30, col-33, col-40, col-50, col-60, col-66, col-70, col-75, col-80, col-83, col-100</dt>
+			<dd>The possible column widths. Place these on the direct children of the container <em>.grid</em></dd>
+			<dt>full-768, full-480, full-320</dt>
+			<dd>Add to the containing element to make all of its children full width at that breakpoint.</dd>
+			<dt>padded</dt>
+			<dd>Add this class to the containing element. It will add the padding to the container equal to the gutter width. <a href="#padded">See examples</a></dd>
+			<dt>no-gutters</dt>
+			<dd>Add this class to the containing element. It will remove all gutters from the children. <a href="#no-gutters">See examples</a></dd>
+			<dt>col-right</dt>
+			<dd>Add this onto one of the columns. It will allow for splitting a column to go the top or bottom on mobile screens. <a href="#divide">See examples</a></dd>
+			<!-- dt>show-768, show-480, show-320</dt>
+			<dd>Show the element at a certain pixel breakpoint and below.</dd-->
+		</dl>
+	</div>
+	<div id="grid-examples">
+		<h2>Examples</h2>
+		<p>Grids we use can be divided as such:</p>
+		<div class="grid full-768 darkorange ">
+			<div class="col-16">
+				<div class="module">16.666%</div>
+			</div>
+			<div class="col-83">
+				<div class="module">83.333% <em class="font-small">full @768px</em></div>
+			</div>
+		</div>
+		<div class="grid full-768 darkorange ">
+			<div class="col-20">
+				<div class="module">20%</div>
+			</div>
+			<div class="col-80">
+				<div class="module">80% <em class="font-small">full @768px</em></div>
+			</div>
+		</div>
+		<div class="grid full-480 darkorange ">
+			<div class="col-25">
+				<div class="module">25%</div>
+			</div>
+			<div class="col-75">
+				<div class="module">75% <em class="font-small">full @480px</em></div>
+			</div>
+		</div>
+		<div class="grid full-480 darkorange ">
+			<div class="col-30">
+				<div class="module">30%</div>
+			</div>
+			<div class="col-70">
+				<div class="module">70% <em class="font-small">full @480</em></div>
+			</div>
+		</div>
+		<div class="grid full-480 darkorange ">
+			<div class="col-33">
+				<div class="module">33.333%</div>
+			</div>
+			<div class="col-66">
+				<div class="module">66.666% <em class="font-small">full @480</em></div>
+			</div>
+		</div>
+		<div class="grid full-320 darkorange ">
+			<div class="col-40">
+				<div class="module">40%</div>
+			</div>
+			<div class="col-60">
+				<div class="module">60% <em class="font-small">full @320px</em></div>
+			</div>
+		</div>
+		<div class="grid darkorange ">
+			<div class="col-50">
+				<div class="module">50%</div>
+			</div>
+			<div class="col-50">
+				<div class="module">50%</div>
+			</div>
+		</div>
+		<div class="grid full-768 darkorange ">
+			<div class="col-100">
+				<div class="module">100%</div>
+			</div>
+		</div>
+		<p id="padded">They can also be padded like so:</p>
+		<div class="grid full-480 padded pink">
+			<div class="col-16">
+				<div class="module">16.666%</div>
+			</div>
+			<div class="col-83">
+				<div class="module">83.333% <em class="font-small">padded, full @480px</em></div>
+			</div>
+		</div>
+		<div class="grid full-480 padded pink">
+			<div class="col-20">
+				<div class="module">20%</div>
+			</div>
+			<div class="col-80">
+				<div class="module">80% <em class="font-small">padded, full @480px</em></div>
+			</div>
+		</div>
+		<div class="grid full-480 padded pink">
+			<div class="col-25">
+				<div class="module">25%</div>
+			</div>
+			<div class="col-75">
+				<div class="module">75% <em class="font-small">padded, full @480px</em></div>
+			</div>
+		</div>
+		<div class="grid full-480 padded pink">
+			<div class="col-30">
+				<div class="module">30%</div>
+			</div>
+			<div class="col-70">
+				<div class="module">70% <em class="font-small">padded, full @480px</em></div>
+			</div>
+		</div>
+		<div class="grid full-768 padded pink">
+			<div class="col-33">
+				<div class="module">33.333%</div>
+			</div>
+			<div class="col-66">
+				<div class="module">66.666% <em class="font-small">padded, full @480px</em></div>
+			</div>
+		</div>
+		<div class="grid padded pink">
+			<div class="col-40">
+				<div class="module">40% <em class="font-small">padded</em></div>
+			</div>
+			<div class="col-60">
+				<div class="module">60% <em class="font-small">padded</em></div>
+			</div>
+		</div>
+		<div class="grid padded pink">
+			<div class="col-50">
+				<div class="module">50% <em class="font-small">padded</em></div>
+			</div>
+			<div class="col-50">
+				<div class="module">50% <em class="font-small">padded</em></div>
+			</div>
+		</div>
+		<div class="grid padded pink">
+			<div class="col-100">
+				<div class="module">100% <em class="font-small">padded</em></div>
+			</div>
+		</div>
+		<p>They can be put together in any combination that adds up to 100 <em class="font-tiny">(99 rounds up to 100)</em>:</p>
+		<div class="grid full-480 padded green">
+			<div class="col-33">
+				<div class="module">33%</div>
+			</div>
+			<div class="col-33">
+				<div class="module">33%</div>
+			</div>
+			<div class="col-33">
+				<div class="module">33%</div>
+			</div>
+		</div>
+		<div class="grid padded green">
+			<div class="col-25">
+				<div class="module">25%</div>
+			</div>
+			<div class="col-25">
+				<div class="module">25%</div>
+			</div>
+			<div class="col-50">
+				<div class="module">50%</div>
+			</div>
+		</div>
+		<div class="grid padded green">
+			<div class="col-16">
+				<div class="module">16.666%</div>
+			</div>
+			<div class="col-66">
+				<div class="module">66.666%</div>
+			</div>
+			<div class="col-16">
+				<div class="module">16.666%</div>
+			</div>
+		</div>
+		<p id="no-gutters">You can also remove the gutters from the columns:</p>
+		<div class="grid no-gutters green">
+			<div class="col-20">
+				<div class="module">20%</div>
+			</div>
+			<div class="col-20">
+				<div class="module">20%</div>
+			</div>
+			<div class="col-20">
+				<div class="module">20%</div>
+			</div>
+			<div class="col-20">
+				<div class="module">20%</div>
+			</div>
+			<div class="col-20">
+				<div class="module">20%</div>
+			</div>
+		</div>
+		<div class="grid no-gutters green">
+			<div class="col-16">
+				<div class="module">16.666%</div>
+			</div>
+			<div class="col-66">
+				<div class="module">66.666%</div>
+			</div>
+			<div class="col-16">
+				<div class="module">16.666%</div>
+			</div>
+		</div>
+		<div class="grid padded no-gutters green">
+			<div class="col-25">
+				<div class="module">25%</div>
+			</div>
+			<div class="col-50">
+				<div class="module">50%</div>
+			</div>
+			<div class="col-25">
+				<div class="module">25%</div>
+			</div>
+		</div>
+		<p id="divide">You can divide up a columns to go to the top or bottom:</p>
+		<div class="grid full-480 blue">
+			<div class="col-33 col-right">
+				<div class="module">33% <em class="font-small">top, full @480px</em></div>
+			</div>
+			<div class="col-66">
+				<div class="module">
+					<p>66.666% <em class="font-small">middle, full @480px</em></p>
+					<p>Shrink the screen to below 767 to see how these wrap differently.</p>
+				</div>
+			</div>
+			<div class="col-33 col-right">
+				<div class="module">33% <em class="font-small">bottom, full @480px</em></div>
+			</div>
+		</div>
+		<div class="grid full-320 blue">
+			<div class="col-33 col-right">
+				<div class="module">33% <em class="font-small">top, full @320px</em></div>
+			</div>
+			<div class="col-66">
+				<div class="module">
+					<p>66.666% <em class="font-small">middle, full @320px</em></p>
+				</div>
+			</div>
+			<div class="col-33 col-right">
+				<div class="module">33% <em class="font-small">bottom, full @320px</em></div>
+			</div>
+		</div>
+		<div class="grid full-480 blue">
+			<div class="col-25">
+				<div class="module">25% <em class="font-small">top, full @480px</em></div>
+			</div>
+			<div class="col-75 col-right">
+				<div class="module">
+					<p>75% <em class="font-small">middle, full @480px</em></p>
+				</div>
+			</div>
+			<div class="col-25">
+				<div class="module">25% <em class="font-small">bottom, full @480px</em></div>
+			</div>
+		</div>
+		<div class="grid full-768 padded blue">
+			<div class="col-25">
+				<div class="module">25% <em class="font-small">full @768px</em></div>
+			</div>
+			<div class="col-75 col-right">
+				<div class="module">
+					<p>75% <em class="font-small">full @768px</em></p>
+				</div>
+			</div>
+			<div class="col-25">
+				<div class="module">25% <em class="font-small">full @768px</em></div>
+			</div>
+		</div>
+		<p>And, of course, you can simply make columns disappear at our breakpoints as well.</p>
+		<p>Hide @768px and below</p>
+		<div class="grid full-768 olive">
+			<div class="col-50 hide-768">
+				<div class="module">
+					<p>A. <em class="font-small">Hide A @768px</em></p>
+				</div>
+			</div>
+			<div class="col-50">
+				<div class="module">B. <em class="font-small">Hide A @768px</em></div>
+			</div>
+		</div>
+		<div class="grid full-768 olive">
+			<div class="col-25 hide-768">
+				<div class="module">A. <em class="font-small">Hide A @768px</em></div>
+			</div>
+			<div class="col-75 col-right">
+				<div class="module">
+					<p>B. <em class="font-small">Hide A @768px</em></p>
+				</div>
+			</div>
+			<div class="col-25">
+				<div class="module">C. <em class="font-small">Hide A @768px</em></div>
+			</div>
+		</div>
+		<div class="grid full-768 olive">
+			<div class="col-25">
+				<div class="module">A. <em class="font-small">Hide B @768px</em></div>
+			</div>
+			<div class="col-75 col-right hide-768">
+				<div class="module">
+					<p>B. 75% <em class="font-small">Hide B @768px</em></p>
+				</div>
+			</div>
+			<div class="col-25">
+				<div class="module">C. <em class="font-small">Hide B @768px</em></div>
+			</div>
+		</div>
+		<div class="grid full-768 olive">
+			<div class="col-25">
+				<div class="module">A. <em class="font-small">Hide C @768px</em></div>
+			</div>
+			<div class="col-75 col-right">
+				<div class="module">
+					<p>B. <em class="font-small">Hide C @768px</em></p>
+				</div>
+			</div>
+			<div class="col-25 hide-768">
+				<div class="module">C. <em class="font-small">Hide C @768px</em></div>
+			</div>
+		</div>
+		<p>Hide @480px and below</p>
+		<div class="grid full-480 purple">
+			<div class="col-25 hide-480">
+				<div class="module">A. <em class="font-small">Hide A @480px</em></div>
+			</div>
+			<div class="col-75 col-right">
+				<div class="module">
+					<p>B. <em class="font-small">Hide A @480px</em></p>
+				</div>
+			</div>
+			<div class="col-25">
+				<div class="module">C. <em class="font-small">Hide A @480px</em></div>
+			</div>
+		</div>
+		<div class="grid full-480 purple">
+			<div class="col-25">
+				<div class="module">A. <em class="font-small">Hide B @480px</em></div>
+			</div>
+			<div class="col-75 col-right hide-480">
+				<div class="module">
+					<p>B. <em class="font-small">Hide B @480px</em></p>
+				</div>
+			</div>
+			<div class="col-25">
+				<div class="module">C. <em class="font-small">Hide B @480px</em></div>
+			</div>
+		</div>
+		<div class="grid full-480 purple">
+			<div class="col-25">
+				<div class="module">A. <em class="font-small">Hide C @480px</em></div>
+			</div>
+			<div class="col-75 col-right">
+				<div class="module">
+					<p>B. <em class="font-small">Hide C @480px</em></p>
+				</div>
+			</div>
+			<div class="col-25 hide-480">
+				<div class="module">C. <em class="font-small">Hide C @480px</em></div>
+			</div>
+		</div>
+		<p>Hide @320px and below</p>
+		<div class="grid full-320 goldenrod">
+			<div class="col-25 hide-320">
+				<div class="module">A. <em class="font-small">Hide A @320px</em></div>
+			</div>
+			<div class="col-75 col-right">
+				<div class="module">
+					<p>B. <em class="font-small">Hide A @320px</em></p>
+				</div>
+			</div>
+			<div class="col-25">
+				<div class="module">C. <em class="font-small">Hide A @320px</em></div>
+			</div>
+		</div>
+		<div class="grid full-320 goldenrod">
+			<div class="col-25">
+				<div class="module">A. <em class="font-small">Hide B @320px</em></div>
+			</div>
+			<div class="col-75 col-right hide-320">
+				<div class="module">
+					<p>B. <em class="font-small">Hide B @320px</em></p>
+				</div>
+			</div>
+			<div class="col-25">
+				<div class="module">C. <em class="font-small">Hide B @320px</em></div>
+			</div>
+		</div>
+		<div class="grid full-320 goldenrod">
+			<div class="col-25">
+				<div class="module">A. <em class="font-small">Hide C @320px</em></div>
+			</div>
+			<div class="col-75 col-right">
+				<div class="module">
+					<p>B. <em class="font-small">Hide C @320px</em></p>
+				</div>
+			</div>
+			<div class="col-25 hide-320">
+				<div class="module">C. <em class="font-small">Hide C @320px</em></div>
+			</div>
+		</div>
+		<p>Lastly, here are some crazy stacked examples:</p>
+		<div class="grid full-768 padded navy">
+			<div class="col-50">
+				<div class="grid">
+					<div class="col-50">
+						<div class="module">1/4 to 1/2</div>
+					</div>
+					<div class="col-50">
+						<div class="module">1/4 to 1/2</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-50">
+				<div class="grid">
+					<div class="col-50">
+						<div class="module">1/4 to 1/2</div>
+					</div>
+					<div class="col-50">
+						<div class="module">1/4 to 1/2</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="grid full-480 padded multi navy">
+			<div class="col-50">
+				<div class="grid">
+					<div class="col-50">
+						<div class="module">1/4 to 1/2</div>
+					</div>
+					<div class="col-50">
+						<div class="module">1/4 to 1/2</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-50">
+				<div class="grid">
+					<div class="col-50">
+						<div class="module">1/4 to 1/2</div>
+					</div>
+					<div class="col-50">
+						<div class="module">1/4 to 1/2</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="grid full-320 padded multi navy">
+			<div class="col-50">
+				<div class="grid">
+					<div class="col-50">
+						<div class="module">1/4 to 1/2</div>
+					</div>
+					<div class="col-50">
+						<div class="module">1/4 to 1/2</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-50">
+				<div class="grid">
+					<div class="col-50">
+						<div class="module">1/4 to 1/2</div>
+					</div>
+					<div class="col-50">
+						<div class="module">1/4 to 1/2</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="grid full-480 no-gutters navy">
+			<div class="col-50">
+				<div class="grid no-gutters">
+					<div class="col-33">
+						<div class="module">1/6 to 1/3</div>
+					</div>
+					<div class="col-33">
+						<div class="module">1/6 to 1/3</div>
+					</div>
+					<div class="col-33">
+						<div class="module">1/6 to 1/3</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-50">
+				<div class="grid no-gutters">
+					<div class="col-33">
+						<div class="module">1/6 to 1/3</div>
+					</div>
+					<div class="col-33">
+						<div class="module">1/6 to 1/3</div>
+					</div>
+					<div class="col-33">
+						<div class="module">1/6 to 1/3</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<p class="notification"><strong>NOTE:</strong> IE8 does NOT support media queries, so columns never collapse to full width.</p>
+	</div>
+</div>
+</body>
+</html>
